@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+    <link href="/static/logo.png" rel="icon">
+    <link href="/static/styles.css" rel="stylesheet">
+    <title>Litracker - {% block title %}{% endblock %}</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand navbar-dark" id ="header" >
+        <div class="container">
+            <a class="navbar-brand" id ="nav_logo" href="#">
+                <div class="logo">
+                    <img src="/static/logo.png" alt="logo" width="50px" class="d-inline-block align-text-top">
+                    itracker
+                </div>
+            </a>
+            <div class="navbar_sides">
+                
+            {% if session["user_id"] %}
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="#">Add</a></li>
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="#">Leaderboard</a></li>
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="#">Logs</a></li>
+                <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+            </ul>
+            {% else %}
+            <ul class="navbar-nav ms-auto mt-2">
+                <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+            </ul>
+            {% endif %}
+                
+            </div>    
+        </div>
+    </nav>
+
+    <main class="container-fluid py-5 text-center">
+        {% block main %}{% endblock %}
+    </main>
+
+    <footer class="mb-5 small text-center text-muted">
+        <p> &copy; 2022 Doofenshmirtz Evil Inc.<br> Developed by Vasanthan</p>
+    </footer>
+
+</body>
+</html>
