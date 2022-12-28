@@ -19,7 +19,7 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 #app.jinja_env.filters["usd"] = usd
 
 # Configure session to use filesystem (instead of signed cookies)
-app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_PERMANENT"] = True
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
@@ -35,11 +35,25 @@ def after_request(response):
     return response
 
 
-@app.route("/")
+@app.route("/",methods =["GET","POST"])
 @login_required
 def index():
     """ shows The three books read by user"""
-    return apology("Login page")
+    if request.method == "GET":
+        u_id = session["user_id"]
+        rows = db.execute("SELECT * from registrants where id = ?",u_id)
+
+        name = rows[0]["name"]
+        username = rows[0]["username"]
+        points = rows[0]["points"]
+
+        return render_template("index.html",name=name,points=points)
+    
+
+
+    return apology("post")
+    
+
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -114,6 +128,18 @@ def register():
 @login_required
 def add():
     """Will update the reading """
+    
+    if request.method == "GET":
+        u_id = session["user_id"]
+        rows = db.execute("SELECT * from registrants where id = ?",u_id)
+
+        name = rows[0]["name"]
+        username = rows[0]["username"]
+        points = rows[0]["points"]
+
+        return render_template("add.html",points=points)
+    
+
     return apology("ADD")
 
 @app.route("/leaderboard", methods=["GET", "POST"])

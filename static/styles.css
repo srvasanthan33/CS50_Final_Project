@@ -3,6 +3,7 @@ body{
     color:white;
     font-family: 'Catamaran', sans-serif;
     background-color: #BDBDBD;
+    font-size: 22px;
 }
 main{
     background-color: #616161;
@@ -21,6 +22,9 @@ nav #nav_logo{
     align-items: center;
 }
 
+.navbar-nav{
+    align-items: center;
+}
 
 li .nav-link{
     font-size: 20px;
@@ -33,4 +37,8 @@ li .nav-link{
 
 #footer p{
     padding: 15px 30%;
+}
+
+.Search{
+    padding:20px 150px;
 }

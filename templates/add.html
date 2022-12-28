@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+
+    <div class="container">
+        <h2>Add Books &emsp;<img src="/static/book.png" alt="logo" width="50px" class="d-inline-block align-text-top"></h2>
+    </div>
+
+    <div class="container" id = "add_form">
+        <form class="Search" name = "Search" >
+
+            <div class="mb-3 row"> 
+                <label for="BookSearch" class="col-sm-2 col-form-label">Book Name</label>
+                <div class="col-sm-10">
+                  <input type="search" class="form-control" id="BookSearch" name = "BookSearch" required>
+                </div>
+              </div>
+
+              <div>
+                <button type="submit" class="btn btn-secondary">Secondary</button>
+              </div>  
+            
+        </form>
+    </div>
+
+{% endblock %}
