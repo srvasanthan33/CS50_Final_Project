@@ -1,0 +1,22 @@
+body{
+    background-color: antiquewhite;
+}
+
+#header{
+    background-color:#8D6E63;
+}
+
+
+nav #nav_logo{
+    font-size: 50px;
+    font-weight: 700;
+}
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+
+li .nav-link{
+    font-size: 20px;
+}
