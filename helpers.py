@@ -1,6 +1,7 @@
 import os
 import requests
 import urllib.parse
+import json
 
 from flask import redirect, render_template, request, session
 from functools import wraps
@@ -33,3 +34,11 @@ def login_required(f):
             return redirect("/login")
         return f(*args, **kwargs)
     return decorated_function
+
+
+def book_finder(searchParam):
+    main_api = f"https://www.googleapis.com/books/v1/volumes?q={searchParam}&maxResults=3"
+
+    json_data = requests.get(main_api).json()
+    return json_data
+

@@ -6,7 +6,7 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from cs50 import SQL
 
-from helpers import apology, login_required
+from helpers import apology, login_required, book_finder
 
 # getting these config values from cs50 problem_set finance
 # Configure application
@@ -128,7 +128,7 @@ def register():
 @login_required
 def add():
     """Will update the reading """
-    
+
     if request.method == "GET":
         u_id = session["user_id"]
         rows = db.execute("SELECT * from registrants where id = ?",u_id)
@@ -139,8 +139,13 @@ def add():
 
         return render_template("add.html",points=points)
     
+    # POST Requests
+    # from search input of book 
+    search = request.form.get("BookSearch")
+    c = book_finder(search)
+    return render_template("add.html",c=c)
 
-    return apology("ADD")
+    #return apology("ADD")
 
 @app.route("/leaderboard", methods=["GET", "POST"])
 @login_required
