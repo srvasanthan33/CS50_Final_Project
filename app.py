@@ -38,6 +38,7 @@ def after_request(response):
 @app.route("/")
 @login_required
 def index():
+    """ shows The three books read by user"""
     return apology("Login page")
 
 
@@ -60,10 +61,10 @@ def login():
             return apology("must provide password", 403)
 
         # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        rows = db.execute("SELECT * FROM registrants WHERE username = ?", request.form.get("username"))
 
         # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+        if len(rows) != 1 or not check_password_hash(rows[0]["pass_hash"], request.form.get("password")):
             return apology("invalid username and/or password", 403)
 
         # Remember which user has logged in
@@ -80,7 +81,73 @@ def login():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
-    return apology("TODO")
+    if request.method == "GET":
+        return render_template("register.html")
+        
+    elif request.method == 'POST':
+        Name = request.form.get("Name")
+        Username = request.form.get("Username")
+        Password1 = request.form.get("Password")
+
+        userbase = db.execute("SELECT * FROM registrants WHERE username = ?",Username)
+        if len(userbase) == 1:
+            return apology("Username already taken")
+
+        #hashing the password
+        Password_hash = generate_password_hash(Password1) 
+
+        # if all the inputs are correct then store the details into the database
+        db.execute("INSERT INTO registrants (name, username, pass_hash) VALUES(?, ?, ?)",Name, Username, Password_hash)
+
+        # To find the used id from database which we inserted in the above , to store it in the session
+        rows = db.execute("SELECT id FROM registrants WHERE username = ?", Username)
+        session["user_id"] = rows[0]["id"]
+
+        # redirecting to main(index) page
+        return redirect("/")
+
+    return apology("Error",404)
+
+
+
+@app.route("/add", methods=["GET", "POST"])
+@login_required
+def add():
+    """Will update the reading """
+    return apology("ADD")
+
+@app.route("/leaderboard", methods=["GET", "POST"])
+@login_required
+def leaderboard():
+    """Based on reading consistency , reaability user will get rankings"""
+    return apology("leaderboard")
+
+
+@app.route("/logs", methods=["GET", "POST"])
+@login_required
+def logs():
+    """Shows what updates the user had done"""
+    return apology("Logs")
+
+
+@app.route("/in_develop", methods=["GET", "POST"])
+@login_required
+def in_develop():
+    """Buy shares of stock"""
+    return apology("Not_Developed")
+
+
+@app.route("/logout")
+def logout():
+    """Log user out"""
+
+    # Forget any user_id
+    session.clear()
+
+    # Redirect user to login form
+    return redirect("/")
+
+
 
 
 

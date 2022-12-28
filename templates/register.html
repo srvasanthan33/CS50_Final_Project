@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid" >
+        <form action="/register" id ="register_form" method="post">
+            <div class="mb-3">
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="Name" name="Name" placeholder="Name" type="text" required>
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="Username" placeholder="Username" type="text" required>
+            </div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" id="Password1" name="Password" min = "7" placeholder="Password" type="password" required>
+            </div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" id="Password2" name="confirm_password" min ="7" placeholder="Re-enter Password" type="password" required>
+            </div>
+            <button class="btn btn-primary" type="submit">Register</button>
+        </form>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="heading">
+                <h1>A Companion which tracks your reading habit </h1>
+                <h4>Our site uses werkzeug.security which does not leak your passwords , and sell your data</h4>
+            </div>
+        </div>
+    </div>
+    
+    <!-- For password validation -->
+    <script src="static/register.js"></script>
+{% endblock %}

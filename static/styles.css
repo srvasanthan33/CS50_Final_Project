@@ -1,9 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@300;600&family=Noto+Sans:wght@300;900&family=Poppins:wght@300&display=swap');
 body{
-    background-color: antiquewhite;
+    color:white;
+    font-family: 'Catamaran', sans-serif;
+    background-color: #BDBDBD;
 }
-
+main{
+    background-color: #616161;
+}
 #header{
-    background-color:#8D6E63;
+    background-color:#212121;
 }
 
 
@@ -19,4 +24,13 @@ nav #nav_logo{
 
 li .nav-link{
     font-size: 20px;
+}
+#footer{
+    color: #3a3a3a;
+    align-items: center;
+    line-height: 30px;
+}
+
+#footer p{
+    padding: 15px 30%;
 }
