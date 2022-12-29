@@ -7,6 +7,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from cs50 import SQL
 
 from helpers import apology, login_required, book_finder,book_id
+from datetime import datetime
+
 
 # getting these config values from cs50 problem_set finance
 # Configure application
@@ -45,18 +47,47 @@ def index():
     name = rows[0]["name"]
     username = rows[0]["username"]
     points = rows[0]["points"]
-    
+    BOOKS = db.execute("SELECT * FROM bookRecord WHERE username = ? ;",username)
     
     if request.method == "GET":
-        BOOKS = db.execute("SELECT * FROM bookRecord WHERE username = ? ;",username)
-
+    
         count = 0
         image = []
         for BOOK in BOOKS:
             image.append(BOOK["image"])
             count += 1
+
+        # to get current page
+        query = db.execute("select MAX(currentPage) as currentPage FROM bookLog WHERE username = ? GROUP BY title;",username)
         
-        return render_template("index.html",BOOKS = BOOKS,name=name,points=points,image=image,count=count)
+        return render_template("index.html",BOOKS = BOOKS,name=name,points=points,image=image,count=count,query = query)
+
+    elif request.method == "POST":
+        Book_title = request.form.get("Book_name")
+        pages = int(request.form.get("pages_read"))
+
+        BOOK = db.execute("SELECT * FROM bookRecord WHERE username = ? AND title = ? ;",username, Book_title)
+
+        Time = datetime.now()
+        # point Calculator
+        point = rows[0]["points"] + pages*1
+
+        if pages > BOOK[0]["page"]:
+            return apology("Pages Exceeded")
+
+        if pages < BOOK[0]["page"]:
+            db.execute("INSERT INTO bookLog (b_id, title, currentPage, username, time) VALUES(?, ?, ?, ?, ?)",BOOK[0]["g_id"],BOOK[0]["title"],pages,username,Time)
+            
+            db.execute("UPDATE registrants SET points = ? WHERE username = ?",point,username)
+        else:
+            db.execute("INSERT INTO bookLog (b_id, title, currentPage, status, username, time) VALUES(?, ?, ?, ?, ?, ?)",BOOK[0]["g_id"],BOOK[0]["title"],BOOK[0]["page"],'Completed',username,Time)
+
+            db.execute("UPDATE registrants SET points = ? WHERE username = ?",point,username)
+        
+        
+        
+        return redirect("/")
+
     
 
 
@@ -178,9 +209,12 @@ def process():
         USERPortfolio = db.execute("SELECT * FROM registrants WHERE id = ?", userId)
         USERNAME = USERPortfolio[0]["username"]
 
-
+        Time = datetime.now()
         db.execute(
             "INSERT INTO bookRecord (g_id, title, author, page, image, username) VALUES(?, ?, ?, ?, ?, ?)", BOOK["id"], BOOK["title"], BOOK["author"], BOOK["pages"], BOOK["image"],USERNAME)
+
+        db.execute(
+            "INSERT INTO bookLog (b_id, title, currentPage, username, time) VALUES(?, ?, ?, ?, ?)",BOOK["id"], BOOK["title"], 0, USERNAME, Time)
 
         return redirect("/")
     elif request.method == "GET":
@@ -202,12 +236,6 @@ def logs():
     """Shows what updates the user had done"""
     return apology("Logs")
 
-
-@app.route("/in_develop", methods=["GET", "POST"])
-@login_required
-def in_develop():
-    """Buy shares of stock"""
-    return apology("Not_Developed")
 
 
 @app.route("/logout")

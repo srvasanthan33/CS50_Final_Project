@@ -6,7 +6,7 @@
 
 {% block main %}
     
-    <div class="container"><h1 style ="">Hello, <span class ="nam">{{name}}!</span></h1></div>
+    <div class="container"><h1 >Hello, <span class ="nam">{{name}}!</span></h1></div>
     <div class="container-fluid"><p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, reprehenderit architecto, cumque iusto tenetur repudiandae fuga voluptatem consequuntur nemo repellat qui accusamus placeat nam voluptate atque iure sint corporis ullam necessitatibus, consectetur pariatur reiciendis molestiae itaque? Provident commodi, eaque cumque vero accusantium, vitae aspernatur beatae possimus laudantium ab harum placeat, iure voluptas et ducimus laboriosam molestiae quaerat voluptatum dolore. Enim soluta beatae labore incidunt. Deserunt inventore a sit eum incidunt reiciendis ex quos laudantium quidem porro perspiciatis dignissimos dolorem, assumenda doloribus accusantium asperiores nisi ut, corrupti eligendi dolores fuga dolor facere? Dolor animi necessitatibus enim quidem iusto! Accusamus dolorum, voluptatem magni veniam corporis ipsa! Quo fugiat facere ullam quasi excepturi aliquam illo dolor veniam, cum velit? Magni itaque culpa dolores. Ab illum maxime consequatur laboriosam natus quo commodi debitis adipisci et tempora. Aperiam accusantium necessitatibus enim corrupti minus! Commodi libero culpa itaque quae quam nihil quo optio odit fugiat qui quod dolor tempore amet, aut officia repudiandae debitis repellendus iure neque eum? Assumenda perferendis consequatur eius id ipsa et accusamus voluptas veritatis sed? Non obcaecati doloribus dignissimos qui facere amet saepe eum minus, repudiandae suscipit excepturi nisi distinctio natus tenetur enim rerum in ullam doloremque earum recusandae, maiores eaque sequi.
     </p></div>
@@ -26,8 +26,12 @@
                     <div class="card-body">
                     <p class="card-text">
                         </b>{{BOOKS[i]["author"]}} <br>
-                    <span class = "pageread">0</span>/{{BOOKS[i]["page"]}}</p>
-                    <div class="bar" style="width:100%; height:5px; background-color: #F48FB1;" ></div>
+                    <span class = "pageread">{{query[i]["currentPage"]}}</span>/{{BOOKS[i]["page"]}}</p>
+                    {% set bar = query[i]["currentPage"] / BOOKS[i]["page"] %}
+                    {% set barp = bar*100 %}
+                    
+                    <!-- Getting template value to implement progress bar feature-->
+                    <div class="bar" style="width:{{barp}}% ; height:5px; background-color: #F48FB1;" ></div>
                     </div>
                 </div>
             </div>
@@ -36,5 +40,27 @@
             </div>
         </div>
     </div>
+    
+    <form action="/" id = "page" method="post">
+        <h2>Sell Shares!</h2>
+        <div class="mb-3">
+            <b>Select Bookname</b>
+            <select autofocus  name="Book_name">
+                <option disabled selected value="">Book</option>
+                {% for book in BOOKS %}
+                    <option id = "Book_name" value="{{ book['title'] }}">{{ book['title']  }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto"  min="1" id = "pages_read" name="pages_read" placeholder="Pages read " type="Number">
+        </div>
+    
+        <button class="btn btn-primary" id = "buyButton" type="submit">Update</button>
+        <script src="static/index.js">
+        
+        </script>
+    </form>
+    
 
 {% endblock %}

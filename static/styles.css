@@ -128,3 +128,7 @@ li .nav-link{
     display:flex;
     justify-content: space-between;
 }
+
+#Book_name{
+    color: #000000;
+}
