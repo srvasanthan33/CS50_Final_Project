@@ -16,16 +16,29 @@
             <div class="mb-3 row"> 
                 <label for="BookSearch" class="col-sm-2 col-form-label">Book Name</label>
                 <div class="col-sm-10">
-                  <input type="search" class="form-control" id="BookSearch" name = "BookSearch" required>
+                  <input type="search" placeholder = "Eg: 1984" class="form-control" id="BookSearch" name = "BookSearch" required>
                 </div>
               </div>
 
               <div>
-                <button type="submit" class="btn btn-secondary">Secondary</button>
+                <button type="submit" class="btn btn-secondary" name = "btn" value ="Search">Search</button>
               </div>  
             
         </form>
     </div>
-    {{c}}
+    <!-- Data obtained from google api , and stored in BOOKLIST-->
+    {% if image|length > 0 %}
+      <div class="conatiner" >
+        
+        <div class="results">
+          {% for i in range(image|length) %}
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique modi ipsum expedita distinctio non doloremque corrupti? Voluptatibus tempore magni fuga, delectus quia deserunt, impedit, accusamus voluptatem facere blanditiis dolorum pariatur.</p>
+          <img src = {{image[i]}}>
+          {% endfor %}
+        </div>
+
+      </div>
+    {% endif %}
+    
 
 {% endblock %}

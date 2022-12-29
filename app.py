@@ -128,7 +128,7 @@ def register():
 @login_required
 def add():
     """Will update the reading """
-
+    image
     if request.method == "GET":
         u_id = session["user_id"]
         rows = db.execute("SELECT * from registrants where id = ?",u_id)
@@ -137,13 +137,21 @@ def add():
         username = rows[0]["username"]
         points = rows[0]["points"]
 
+
+
         return render_template("add.html",points=points)
     
     # POST Requests
     # from search input of book 
-    search = request.form.get("BookSearch")
-    c = book_finder(search)
-    return render_template("add.html",c=c)
+    try:
+        search = request.form.get("BookSearch")
+        BOOKLIST = book_finder(search)
+        for BOOK in BOOKLIST:
+            image.append(BOOK["image"])
+    except :
+        return apology("Book Not Found")
+    
+    return render_template("add.html",BOOKLIST=BOOKLIST,image=image)
 
     #return apology("ADD")
 
@@ -177,6 +185,8 @@ def logout():
 
     # Redirect user to login form
     return redirect("/")
+    
+
 
 
 

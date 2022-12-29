@@ -36,9 +36,36 @@ def login_required(f):
     return decorated_function
 
 
+# which send book queries in the form of list >> dictionary
 def book_finder(searchParam):
-    main_api = f"https://www.googleapis.com/books/v1/volumes?q={searchParam}&maxResults=3"
+    main_api = f"https://www.googleapis.com/books/v1/volumes?q={searchParam}&maxResults=5"
+
+    #after we got the url , we are going to parse into json() w
 
     json_data = requests.get(main_api).json()
-    return json_data
+ 
+
+    # storing json data into the python_dictionary
+    try:
+        BOOKLIST = []
+        for i in range(3): # To send maximum 3 data
+            BOOK = {}
+            data = json_data["items"][i]
+            try:    
+                BOOK["id"] = data["id"]
+                BOOK["title"] = data["volumeInfo"]["title"]
+                BOOK["author"] = data["volumeInfo"]["authors"][0]
+                BOOK["description"] = data["volumeInfo"]["description"]
+                BOOK["pages"] = int(data["volumeInfo"]["pageCount"])
+                BOOK["image"] = data["volumeInfo"]["imageLinks"]["smallThumbnail"]
+
+            except:
+                BOOK["pages"] = None
+                BOOK["image"] = data["volumeInfo"]["imageLinks"]["smallThumbnail"]
+
+            BOOKLIST.append(BOOK)
+        return BOOKLIST
+
+    except (KeyError, TypeError, ValueError):
+        return None
 
