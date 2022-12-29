@@ -11,34 +11,56 @@
     </div>
 
     <div class="container" id = "add_form">
-        <form class="Search" name = "Search" id ="addbook" method="post">
+        <form class="Search" name = "Search" id ="addbook" action = "/add" method="post">
 
             <div class="mb-3 row"> 
                 <label for="BookSearch" class="col-sm-2 col-form-label">Book Name</label>
                 <div class="col-sm-10">
-                  <input type="search" placeholder = "Eg: 1984" class="form-control" id="BookSearch" name = "BookSearch" required>
+                  <input type="text" placeholder = "Eg: 1984" class="form-control" id="BookSearch" name = "BookSearch" >
                 </div>
               </div>
 
               <div>
                 <button type="submit" class="btn btn-secondary" name = "btn" value ="Search">Search</button>
               </div>  
-            
-        </form>
+        </form>  
+        
     </div>
+    
     <!-- Data obtained from google api , and stored in BOOKLIST-->
     {% if image|length > 0 %}
+    <form method = 'POST' action = "/process" name = "Add">
       <div class="conatiner" >
         
         <div class="results">
-          {% for i in range(image|length) %}
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique modi ipsum expedita distinctio non doloremque corrupti? Voluptatibus tempore magni fuga, delectus quia deserunt, impedit, accusamus voluptatem facere blanditiis dolorum pariatur.</p>
-          <img src = {{image[i]}}>
+          {% for i in range(BOOKLIST|length) %}
+
+          <div class="row">
+
+            <div class="col"> <img src = {{image[i]}} width="200px" > </div>
+            <div class="col">
+              <h1>{{BOOKLIST[i]["title"]}}</h1>
+              <div class="contents">
+                <b>Author</b>:{{BOOKLIST[i]["author"]}}
+                <b>Pages</b>:{{BOOKLIST[i]["author"]}}
+                <b>Desciption</b>:{{BOOKLIST[i]["description"]}}...
+                <br>
+                {% set var = BOOKLIST[i]["id"] %}
+                {{var}}
+                <button class="button-40" type="submit" name = "btn" value = {{var}} >Add</button>
+              </div>
+            </div>
+            
+
+          </div>
+          <br>
+
           {% endfor %}
         </div>
 
       </div>
+      </form>
     {% endif %}
     
-
+    
 {% endblock %}

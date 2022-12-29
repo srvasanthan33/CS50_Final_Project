@@ -6,7 +6,7 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from cs50 import SQL
 
-from helpers import apology, login_required, book_finder
+from helpers import apology, login_required, book_finder,book_id
 
 # getting these config values from cs50 problem_set finance
 # Configure application
@@ -128,7 +128,7 @@ def register():
 @login_required
 def add():
     """Will update the reading """
-    image
+    image = []
     if request.method == "GET":
         u_id = session["user_id"]
         rows = db.execute("SELECT * from registrants where id = ?",u_id)
@@ -139,19 +139,44 @@ def add():
 
 
 
-        return render_template("add.html",points=points)
+        return render_template("add.html",points=points,image = image)
     
     # POST Requests
     # from search input of book 
+    
+    
     try:
         search = request.form.get("BookSearch")
         BOOKLIST = book_finder(search)
+
         for BOOK in BOOKLIST:
             image.append(BOOK["image"])
     except :
         return apology("Book Not Found")
     
+    
     return render_template("add.html",BOOKLIST=BOOKLIST,image=image)
+
+@app.route("/process", methods=["GET", "POST"])
+@login_required
+def process():
+    if request.method == "POST":
+        c = request.form.get('btn')
+        BOOK = book_id(c)
+
+        #To get username
+        userId = session.get("user_id")
+        USERPortfolio = db.execute("SELECT * FROM registrants WHERE id = ?", userId)
+        USERNAME = USERPortfolio[0]["username"]
+
+
+        db.execute(
+            "INSERT INTO bookRecord (g_id, title, author, page, image, username) VALUES(?, ?, ?, ?, ?, ?)", BOOK["id"], BOOK["title"], BOOK["author"], BOOK["pages"], BOOK["image"],USERNAME)
+
+        return redirect("/")
+    elif request.method == "GET":
+        return apology("sdfsd")
+
 
     #return apology("ADD")
 

@@ -48,7 +48,7 @@ def book_finder(searchParam):
     # storing json data into the python_dictionary
     try:
         BOOKLIST = []
-        for i in range(3): # To send maximum 3 data
+        for i in range(5): # To send maximum 3 data
             BOOK = {}
             data = json_data["items"][i]
             try:    
@@ -56,6 +56,16 @@ def book_finder(searchParam):
                 BOOK["title"] = data["volumeInfo"]["title"]
                 BOOK["author"] = data["volumeInfo"]["authors"][0]
                 BOOK["description"] = data["volumeInfo"]["description"]
+
+                if len(BOOK["description"]) < 10:
+                    BOOK["description"] = "                                           "
+                elif len(BOOK["description"]) < 30:
+                    BOOK["description"] = BOOK["description"][:30]
+                elif len(BOOK["description"]) < 50:
+                    BOOK["description"] = BOOK["description"][:50]
+                else:
+                    BOOK["description"] = BOOK["description"][:70]
+
                 BOOK["pages"] = int(data["volumeInfo"]["pageCount"])
                 BOOK["image"] = data["volumeInfo"]["imageLinks"]["smallThumbnail"]
 
@@ -69,3 +79,28 @@ def book_finder(searchParam):
     except (KeyError, TypeError, ValueError):
         return None
 
+def book_id(id):
+    id = "PEpoEAAAQBAJ"
+    main_api = f"https://www.googleapis.com/books/v1/volumes/{id}"
+
+    data = requests.get(main_api).json()
+
+    #main_api = f"https://www.googleapis.com/books/v1/volumes/{id}"
+
+
+    
+
+        # storing json data into the python_dictionary
+        
+    BOOK = {}
+    
+    BOOK["id"] = data["id"]
+    BOOK["title"] = data["volumeInfo"]["title"]
+    BOOK["author"] = data["volumeInfo"]["authors"][0]
+    BOOK["pages"] = int(data["volumeInfo"]["pageCount"])
+    BOOK["image"] = data["volumeInfo"]["imageLinks"]["smallThumbnail"]
+
+
+
+
+    return BOOK 
