@@ -105,3 +105,26 @@ li .nav-link{
     padding: .75rem 1.5rem;
   }
 }
+
+.name{
+    color: #F06292;
+    box-shadow: #000000;
+}
+.nam{
+    color: #850c34;
+
+    box-shadow: #000000;
+}
+.books{
+    padding: 30px;
+}
+.card{
+    background-color: #1b1b1b;
+    color: #F48FB1;
+    padding:8px;
+}
+
+#rows{
+    display:flex;
+    justify-content: space-between;
+}

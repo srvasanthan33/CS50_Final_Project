@@ -39,19 +39,28 @@ def after_request(response):
 @login_required
 def index():
     """ shows The three books read by user"""
+    u_id = session["user_id"]
+    rows = db.execute("SELECT * from registrants where id = ?",u_id)
+
+    name = rows[0]["name"]
+    username = rows[0]["username"]
+    points = rows[0]["points"]
+    
+    
     if request.method == "GET":
-        u_id = session["user_id"]
-        rows = db.execute("SELECT * from registrants where id = ?",u_id)
+        BOOKS = db.execute("SELECT * FROM bookRecord WHERE username = ? ;",username)
 
-        name = rows[0]["name"]
-        username = rows[0]["username"]
-        points = rows[0]["points"]
-
-        return render_template("index.html",name=name,points=points)
+        count = 0
+        image = []
+        for BOOK in BOOKS:
+            image.append(BOOK["image"])
+            count += 1
+        
+        return render_template("index.html",BOOKS = BOOKS,name=name,points=points,image=image,count=count)
     
 
 
-    return apology("post")
+
     
 
 
