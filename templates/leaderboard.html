@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    logs
+{% endblock %}
+
+{% block main %}
+
+
+
+   
+    <div class="container">
+        <h1>Leaderboard &emsp13;<img src="static/trophy.png"></h1>
+    
+            <div class="row" id ="leaders">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>username</th>
+                        <th>Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ROW in LOGS %}
+                    <tr>
+                        <td>{{ROW["id"]}}</td>
+                        <td>{{ROW["name"]}}</td>
+                        <td>{{ROW["username"]}}</td>
+                        <td>{{ROW["points"]}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+        </div>
+    </div>
+
+{% endblock %}

@@ -7,7 +7,7 @@
 {% block main %}
 
     <div class="container">
-        <h2>Add Books &emsp;<img src="/static/book.png" alt="logo" width="50px" class="d-inline-block align-text-top"></h2>
+        <h1>Add Books &emsp;<img src="/static/book.png" alt="logo" width="50px" class="d-inline-block align-text-top"></h1>
     </div>
 
     <div class="container" id = "add_form">
@@ -21,7 +21,7 @@
               </div>
 
               <div>
-                <button type="submit" class="btn btn-secondary" name = "btn" value ="Search">Search</button>
+                <button type="submit" class="btn btn-dark" name = "btn" value ="Search">Search</button>
               </div>  
         </form>  
         
@@ -30,7 +30,7 @@
     <!-- Data obtained from google api , and stored in BOOKLIST-->
     {% if image|length > 0 %}
     <form method = 'POST' action = "/process" name = "Add">
-      <div class="conatiner" >
+      <div class="container" >
         
         <div class="results">
           {% for i in range(BOOKLIST|length) %}
@@ -46,7 +46,6 @@
                 <b>Desciption</b>:{{BOOKLIST[i]["description"]}}...
                 <br>
                 {% set var = BOOKLIST[i]["id"] %}
-                {{var}}
                 <button class="button-40" type="submit" name = "btn" value = {{var}} >Add</button>
               </div>
             </div>

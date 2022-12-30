@@ -58,13 +58,17 @@ def index():
             count += 1
 
         # to get current page
-        query = db.execute("select MAX(currentPage) as currentPage FROM bookLog WHERE username = ? GROUP BY title;",username)
+        query = db.execute("select title,MAX(currentPage) as currentPage FROM bookLog WHERE username = ? GROUP BY title ORDER BY b_id;",username)
         
         return render_template("index.html",BOOKS = BOOKS,name=name,points=points,image=image,count=count,query = query)
 
     elif request.method == "POST":
         Book_title = request.form.get("Book_name")
-        pages = int(request.form.get("pages_read"))
+        pages = request.form.get("pages_read")
+        
+        if not pages or not Book_title:
+            return("error")
+        pages = int(pages)
 
         BOOK = db.execute("SELECT * FROM bookRecord WHERE username = ? AND title = ? ;",username, Book_title)
 
@@ -227,6 +231,27 @@ def process():
 @login_required
 def leaderboard():
     """Based on reading consistency , reaability user will get rankings"""
+
+    if request.method == 'GET':
+        # getting username from the session
+        u_id = session["user_id"]
+        rows = db.execute("SELECT * from registrants where id = ?",u_id)
+
+        name = rows[0]["name"]
+        username = rows[0]["username"]  
+        points = rows[0]["points"]  
+
+        ROWS = db.execute("SELECT name, username, points FROM  registrants ORDER BY points desc")
+        LOGS = []
+        for i in range(len(ROWS)):
+            D = {}
+            D["id"] = i + 1
+            D["name"] = ROWS[i]["name"]
+            D["username"] = ROWS[i]["username"]
+            D["points"] = ROWS[i]["points"]
+            LOGS.append(D)
+
+        return render_template("leaderboard.html",LOGS = LOGS,points = points)
     return apology("leaderboard")
 
 
@@ -234,8 +259,37 @@ def leaderboard():
 @login_required
 def logs():
     """Shows what updates the user had done"""
+
+    if request.method == 'GET':
+        # getting username from the session
+        u_id = session["user_id"]
+        rows = db.execute("SELECT * from registrants where id = ?",u_id)
+
+        name = rows[0]["name"]
+        username = rows[0]["username"]  
+        points = rows[0]["points"]  
+
+        ROWS = db.execute("SELECT * FROM bookLog WHERE username = ? ORDER BY id;",username)   
+        LOGS = []
+        
+        for R in ROWS:
+            D = {}
+            D["id"] = R["id"]
+            D["title"] = R["title"]
+            D["page"] = R["currentPage"]
+            D["status"] = R["status"]
+            D["time"] = R["time"]
+            LOGS.append(D)
+        
+
+        return render_template("log.html",points=points,LOGS=LOGS)
+
+        
     return apology("Logs")
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
 
 
 @app.route("/logout")

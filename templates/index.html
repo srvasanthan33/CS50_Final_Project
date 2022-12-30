@@ -42,10 +42,10 @@
     </div>
     
     <form action="/" id = "page" method="post">
-        <h2>Sell Shares!</h2>
+        <h2></h2>
         <div class="mb-3">
             <b>Select Bookname</b>
-            <select autofocus  name="Book_name">
+            <select   name="Book_name">
                 <option disabled selected value="">Book</option>
                 {% for book in BOOKS %}
                     <option id = "Book_name" value="{{ book['title'] }}">{{ book['title']  }}</option>
@@ -53,10 +53,10 @@
             </select>
         </div>
         <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto"  min="1" id = "pages_read" name="pages_read" placeholder="Pages read " type="Number">
+            <input autocomplete="off"  class="form-control mx-auto w-auto"  min="1" id = "pages_read" name="pages_read" placeholder="Pages read " type="Number">
         </div>
     
-        <button class="btn btn-primary" id = "buyButton" type="submit">Update</button>
+        <button class="btn btn-dark" id = "buyButton" type="submit">Update</button>
         <script src="static/index.js">
         
         </script>

@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    logs
+{% endblock %}
+
+{% block main %}
+
+
+
+   
+    <div class="container">
+        <h1>Insights<img src="static/bar-chart.png"></h1>
+    
+            <div class="row" id ="tables">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Pages Read</th>
+                        <th>Status</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ROW in LOGS %}
+                    <tr>
+                        <td>{{ROW["id"]}}</td>
+                        <td>{{ROW["title"]}}</td>
+                        <td>{{ROW["page"]}}</td>
+                        <td>{{ROW["status"]}}</td>
+                        <td>{{ROW["time"]}}</td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+        </div>
+    </div>
+
+{% endblock %}

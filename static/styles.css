@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@300;600&family=Noto+Sans:wght@300;900&family=Poppins:wght@300&display=swap');
 body{
-    color:white;
-    font-family: 'Catamaran', sans-serif;
-    background-color: #BDBDBD;
+    color:rgb(0, 0, 0);
+    font-family: 'Poppins', sans-serif;
+    background-color: #424242;
     font-size: 22px;
 }
 main{
-    background-color: #616161;
+    background-color: #BDBDBD;
 }
 #header{
     background-color:#212121;
@@ -29,15 +29,7 @@ nav #nav_logo{
 li .nav-link{
     font-size: 20px;
 }
-#footer{
-    color: #3a3a3a;
-    align-items: center;
-    line-height: 30px;
-}
 
-#footer p{
-    padding: 15px 30%;
-}
 
 .Search{
     padding:20px 150px;
@@ -46,7 +38,7 @@ li .nav-link{
     color: yellow;
     font-family: 'Catamaran', sans-serif;
     font-weight: 600;
-    background-color: #00000071;
+    background-color: #000000ad;
     padding:30px 100px;
     border-radius: 6px;
     box-shadow: #000000;
@@ -131,4 +123,88 @@ li .nav-link{
 
 #Book_name{
     color: #000000;
+}
+
+
+
+
+
+table {
+    background-color: transparent;
+    margin-bottom: 1rem;
+    width: 100%;
+    font-weight: 300;
+    color: #ffffff;
+
+}
+table th{
+    background-color:rgba(0, 0, 0, 0.3) ;
+}
+table th,
+table td {
+    padding: 0.75rem;
+    vertical-align: middle;
+}
+
+tbody tr:nth-of-type(odd) {
+    background-color: rgb(179, 208, 255, 0.3);
+    border-radius:6px;
+}
+
+#tables{
+    padding: 40px 70px;
+    
+    background-color: #3a3a3a;
+    border-radius: 8px;
+}
+#leaders{
+        padding: 40px 70px;
+        
+        background-color: #3a3a3a;
+        border-radius: 8px;
+    }
+
+
+/* for about page */
+.hero {
+    padding: 60px 45px;
+    display: flex;
+    justify-content: center;
+    
+ }
+
+ .hero-content{
+    max-width: 760px;
+   
+ }
+
+ .hero h1{
+    font-weight: normal;
+    font-size: 4rem;
+    color: #a52751;
+    font-weight: 800;
+    margin: 0;
+ }
+
+ /*footer*/
+ #footer{
+    color: #ffffff;
+    background-color: #424242;
+    align-items: center;
+    font-size: medium;
+    line-height: 30px;
+}
+
+#footer p{
+    padding: 50px 30% 0px 30%;
+    
+}
+
+#footer a{
+    text-decoration: none;
+    color: #df1b5c;
+
+}
+#footer a:hover{
+    color: #fd4884;
 }
