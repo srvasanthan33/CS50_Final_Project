@@ -30,7 +30,29 @@ li .nav-link{
     font-size: 20px;
 }
 
+/* Login page */
+.hero_Add{
+    padding: 60px 45px;
+    display: flex;
+    justify-content: center;
+    
+ }
 
+ .hero-contents{
+    max-width: 900px;
+   
+ }
+
+ .hero_Add h1{
+    font-weight: normal;
+    font-size: 4rem;
+    color: #a52751;
+    font-weight: 800;
+    margin: 0;
+ }
+
+ /*add page*/
+ 
 .Search{
     padding:20px 150px;
 }
