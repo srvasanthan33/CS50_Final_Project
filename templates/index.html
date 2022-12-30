@@ -8,21 +8,26 @@
     
     <div class="container"><h1 >Hello, <span class ="nam">{{name}}!</span></h1></div>
     <div class="container-fluid"><p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, reprehenderit architecto, cumque iusto tenetur repudiandae fuga voluptatem consequuntur nemo repellat qui accusamus placeat nam voluptate atque iure sint corporis ullam necessitatibus, consectetur pariatur reiciendis molestiae itaque? Provident commodi, eaque cumque vero accusantium, vitae aspernatur beatae possimus laudantium ab harum placeat, iure voluptas et ducimus laboriosam molestiae quaerat voluptatum dolore. Enim soluta beatae labore incidunt. Deserunt inventore a sit eum incidunt reiciendis ex quos laudantium quidem porro perspiciatis dignissimos dolorem, assumenda doloribus accusantium asperiores nisi ut, corrupti eligendi dolores fuga dolor facere? Dolor animi necessitatibus enim quidem iusto! Accusamus dolorum, voluptatem magni veniam corporis ipsa! Quo fugiat facere ullam quasi excepturi aliquam illo dolor veniam, cum velit? Magni itaque culpa dolores. Ab illum maxime consequatur laboriosam natus quo commodi debitis adipisci et tempora. Aperiam accusantium necessitatibus enim corrupti minus! Commodi libero culpa itaque quae quam nihil quo optio odit fugiat qui quod dolor tempore amet, aut officia repudiandae debitis repellendus iure neque eum? Assumenda perferendis consequatur eius id ipsa et accusamus voluptas veritatis sed? Non obcaecati doloribus dignissimos qui facere amet saepe eum minus, repudiandae suscipit excepturi nisi distinctio natus tenetur enim rerum in ullam doloremque earum recusandae, maiores eaque sequi.
+        <div class="content_add">
+            <h3>In this modern world Book reading has been drastly declined, lifestyle of people is now rapidly gaining pace.
+                people who have a reading habit finds difficulty in maintain their reading statsitics.<b>Litracker</b> , a Online web app
+                which stores our Book stats like how much pages we have read. Go and Start your reading journey
+            </h3>
+        </div>
     </p></div>
 
     <div class="container">
         <h2>Your <span class = "nam">Books</span> &emsp;<img src="/static/book.png" alt="logo" width="50px" class="d-inline-block align-text-top"></h2>
         
         <div class="books">
-            <div class="row" id = "rows">
+            <div class="row gy-5" id = "rows">
             {% for i in range(count)%}
             {% set bookid = BOOKS[i]["g_id"] %}
             
-            <div class="col-3">
-                <div class="card" style="width:300px" >
+            <div class="col-md-4 col-4">
+                <div class="card" style="width:350px" >
                     <h3 class="card-header"><span class = "name">{{BOOKS[i]["title"]}}</span></h3>
-                    <a href = "http://books.google.co.in/books?id={{bookid}}&hl=&source=gbs_api"><img class="card-img-top" src={{image[i]}} width = "100px"alt="Card image cap" ></a>
+                    <a href = "http://books.google.co.in/books?id={{bookid}}&hl=&source=gbs_api"><img class="card-img-top" src={{image[i]}} width = "50px"alt="Card image cap" ></a>
                     <div class="card-body">
                     <p class="card-text">
                         </b>{{BOOKS[i]["author"]}} <br>

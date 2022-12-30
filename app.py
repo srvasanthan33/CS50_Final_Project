@@ -67,7 +67,7 @@ def index():
         pages = request.form.get("pages_read")
         
         if not pages or not Book_title:
-            return("error")
+            return apology("error occured")
         pages = int(pages)
 
         BOOK = db.execute("SELECT * FROM bookRecord WHERE username = ? AND title = ? ;",username, Book_title)

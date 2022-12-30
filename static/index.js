@@ -2,8 +2,9 @@ let docc = document.querySelector("#page");
 
 docc.addEventListener("submit", function(e){
     
-    pages = docc.querySelector("#pages_read").value
-    
+    pages = docc.querySelector("#pages_read").value;
+    alert(pages);
+    alert("If you have entered wrong book contact admin")
 
     if (pages > 100)
     {
