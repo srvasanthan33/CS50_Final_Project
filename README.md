@@ -8,7 +8,7 @@ Litracker - CS50_Final_Project
 -----
 #### Video Demo: https://youtu.be/Cxg6rWa_-58
 
-#### Description: **Litracker** is a light, Python/Flask web application which maintains the Book readong status of the user using Google Books API. This is for educational purpose on how the API works. It first stores the books which we are reading right now , then after every time we read the book we'll have to update the pages
+#### Description: **Litracker** is a light, Python/Flask web application which maintains the Book reading status of the user using Google Books API. This is for educational purpose on how the API works. It first stores the books which we are reading right now , then after every time we read the book we'll have to update the pages
 
 
 ##### Usage
