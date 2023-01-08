@@ -26,11 +26,12 @@ This is like regular web app, there is no complexity in using this app
 9. Users can also see the Leaderboard  and their Entries on the respective sections in `Nav-bar`
 
 ##### Tools used
---------------
-.Flask framework
-.Sqlite3 database engine
-.Bootstrap CSS framework
-.VS Code - Text Editor
+
+
+* Flask framework
+* Sqlite3 database engine
+* Bootstrap CSS framework
+* VS Code - Text Editor
 
 ##### Underlying details
 --------
